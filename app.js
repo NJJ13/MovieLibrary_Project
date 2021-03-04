@@ -19,6 +19,7 @@ $(document).ready(function(){
                     "<td>" + value.title + "</td>" +
                     "<td>" + value.director + "</td>" +
                     "<td>" + value.genre + "</td>" +
+                    "<td>" + "<button type='button'" + "class='btn btn-primary btn-lg'>" + "Edit" + "" + "</button>" +
                 "</tr>"
             );
         });
