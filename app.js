@@ -24,6 +24,7 @@ $(document).ready(function(){
         });
     });
 });
+<<<<<<< HEAD
 
 function movieDetails(id){
     $.get('https://localhost:44325/api/movie/', function(data){
@@ -41,3 +42,5 @@ function movieDetails(id){
 
     })
 }
+=======
+>>>>>>> 5569103921ef3d7e0e7ad07bc915fc78b120d75e
