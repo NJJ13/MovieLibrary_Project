@@ -31,8 +31,7 @@ function movieDetails(id){
     $(".tableHead").html(
         "<th scope='col'>Title</th>" + 
         "<th scope='col'>Director</th>"+ 
-        "<th scope='col'>Genre</th>"+
-        "<th scope='col'></th>"
+        "<th scope='col'>Genre</th>"
     )
     $.get('https://localhost:44325/api/movie/', function(data){
         data.map(function(el){
@@ -42,10 +41,30 @@ function movieDetails(id){
                 "<td>" + el.title + "</td>" +
                 "<td>" + el.director + "</td>" +
                 "<td>" + el.genre + "</td>" +
-                "<td>" + "<button type='button'" + "class='btn btn-primary btn-lg'>" + "Edit" + "" + "</button>" +
             "</tr>")}
-        })
-        
-
-    })
-}
+        });
+    });
+    $.get('https://localhost:44325/api/movie/', function(data){
+        data.map(function(el){
+            if(id === el.movieId){
+            $(".editInfo").html(
+                "<h3> Update Information</h3>" +
+                "<div class='form-group'>" +
+                "<label class='col-form-label' for='inputDefault'>Title</label>" +
+                "<input type='text' class='form-control' placeholder='Updated Title' id='inputDefault'>"+
+                "<button type='button'" + "class='btn btn-primary btn-sm'>" + "Save Changes" + "" + "</button>" +
+            "</div>" +
+            "<div class='form-group'>" +
+                "<label class='col-form-label' for='inputDefault'>Director</label>" +
+                "<input type='text' class='form-control' placeholder='Updated Director' id='inputDefault'>"+
+                "<button type='button'" + "class='btn btn-primary btn-sm'>" + "Save Changes" + "" + "</button>" +
+            "</div>" +
+            "<div class='form-group'>" +
+                "<label class='col-form-label' for='inputDefault'>Genre</label>" +
+                "<input type='text' class='form-control' placeholder='Updated Genre' id='inputDefault'>"+
+                "<button type='button'" + "class='btn btn-primary btn-sm'>" + "Save Changes" + "" + "</button>" +
+            "</div>" 
+            )}
+        });
+    });
+};
