@@ -12,21 +12,28 @@ $(document).ready(function(){
         }
     })
     .then(function(data){
+        $(".tableHead").append(
+            "<th scope='col'>Title</th>" , 
+            "<th scope='col'></th>"
+        )
         $.each(data, function(index, value){
             $(".movieData").append(
                 "<tr>" + 
                     "<td>" + value.title + "</td>" +
-                    "<td>" + value.director + "</td>" +
-                    "<td>" + value.genre + "</td>" +
                     "<td>" + "<button type='button'" + "onclick='movieDetails(" + value.movieId + ");'" + "class='btn btn-primary btn-lg'>" + "Details" + "" + "</button>" +
                 "</tr>"
             );
         });
     });
 });
-<<<<<<< HEAD
 
 function movieDetails(id){
+    $(".tableHead").html(
+        "<th scope='col'>Title</th>" + 
+        "<th scope='col'>Director</th>"+ 
+        "<th scope='col'>Genre</th>"+
+        "<th scope='col'></th>"
+    )
     $.get('https://localhost:44325/api/movie/', function(data){
         data.map(function(el){
             if(id === el.movieId){
@@ -42,5 +49,3 @@ function movieDetails(id){
 
     })
 }
-=======
->>>>>>> 5569103921ef3d7e0e7ad07bc915fc78b120d75e
