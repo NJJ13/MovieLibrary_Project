@@ -15,13 +15,29 @@ $(document).ready(function(){
         $.each(data, function(index, value){
             $(".movieData").append(
                 "<tr>" + 
-                    "<td>" + value.movieId + "</td>" +
                     "<td>" + value.title + "</td>" +
                     "<td>" + value.director + "</td>" +
                     "<td>" + value.genre + "</td>" +
-                    "<td>" + "<button type='button'" + "class='btn btn-primary btn-lg'>" + "Edit" + "" + "</button>" +
+                    "<td>" + "<button type='button'" + "onclick='movieDetails(" + value.movieId + ");'" + "class='btn btn-primary btn-lg'>" + "Details" + "" + "</button>" +
                 "</tr>"
             );
         });
     });
 });
+
+function movieDetails(id){
+    $.get('https://localhost:44325/api/movie/', function(data){
+        data.map(function(el){
+            if(id === el.movieId){
+            $(".movieData").html(
+            "<tr>" + 
+                "<td>" + el.title + "</td>" +
+                "<td>" + el.director + "</td>" +
+                "<td>" + el.genre + "</td>" +
+                "<td>" + "<button type='button'" + "class='btn btn-primary btn-lg'>" + "Edit" + "" + "</button>" +
+            "</tr>")}
+        })
+        
+
+    })
+}
