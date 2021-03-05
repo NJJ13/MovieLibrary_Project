@@ -46,20 +46,22 @@ function movieDetails(id){
     });
     $.get('https://localhost:44325/api/movie/'+id, function(data){
         $(".editInfo").html(
-            `<h3> Update Information</h3>
+        `<h3> Update Information</h3>
+        <div id='updateForm'>
             <div class='form-group'>
-            <label class='col-form-label' for='title'>Title</label>
-            <input type='text' class='form-control' value='${data.title}' id='title'>
+                <label class='col-form-label' for='title'>Title</label>
+                <input type='text' class='form-control' value='${data.title}' id='title'>
+            </div>
+            <div class='form-group'>
+                <label class='col-form-label' for='director'>Director</label>
+                <input type='text' class='form-control' value='${data.director}' id='director'>
+            </div>
+            <div class='form-group'>
+                <label class='col-form-label' for='genre'>Genre</label>
+                <input type='text' class='form-control' value='${data.genre}' id='genre'>
+            </div>
         </div>
-        <div class='form-group'>
-            <label class='col-form-label' for='director'>Director</label>
-            <input type='text' class='form-control' value='${data.director}' id='director'>
-        </div>
-        <div class='form-group'>
-            <label class='col-form-label' for='genre'>Genre</label>
-            <input type='text' class='form-control' value='${data.genre}' id='genre'>
-        </div>
-        <button type='button' onclick='processChange();' class='btn btn-primary btn-sm'>Save Changes</button>` 
+        <button type='button' onclick='processChange($('#updateForm'));' class='btn btn-primary btn-sm'>Save Changes</button>` 
         )}
     );
 };
