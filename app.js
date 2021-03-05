@@ -97,7 +97,6 @@ function processChange($){
             title : $('#title').val(),
             director : $('director').val(),
             genre : $('#genre').val(),
-            
         };
         $.ajax({
             url: 'https://localhost:44325/api/movie',
