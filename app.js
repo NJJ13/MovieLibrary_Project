@@ -38,49 +38,57 @@ function movieDetails(id){
         `<h3> Update Information</h3>
         <div id='updateForm'>
             <div class='form-group'>
+                <input type='hidden' value='${data.movieId}' id='updateId'>
+            </div>
+            <div class='form-group'>
                 <label class='col-form-label' for='title'>Title</label>
-                <input type='text' class='form-control' value='${data.title}' id='title'>
+                <input type='text' class='form-control' value='${data.title}' id='updateTitle'>
             </div>
             <div class='form-group'>
                 <label class='col-form-label' for='director'>Director</label>
-                <input type='text' class='form-control' value='${data.director}' id='director'>
+                <input type='text' class='form-control' value='${data.director}' id='updateDirector'>
             </div>
             <div class='form-group'>
                 <label class='col-form-label' for='genre'>Genre</label>
-                <input type='text' class='form-control' value='${data.genre}' id='genre'>
+                <input type='text' class='form-control' value='${data.genre}' id='updateGenre'>
             </div>
         </div>
-        <button type='button' onclick='processChange($('#updateForm'));' class='btn btn-primary btn-sm'>Save Changes</button> <br>` 
+        <button class='btn btn-primary btn-sm' onclick='processChange();' id="saveChanges">Save Changes</button>` 
         )}
     );
-    $("#response").append(
+    $("#response").html(
         `<button type='button' onclick='returnToHome();' class='btn btn-primary btn-large'>Return to Library</button>`
     );
-};
+ };
 
-function processChange($){
-    function processForm( e ){
-        var dict = {
-            Title : this["title"].value,
-            Director: this["director"].value,
-            Genre: this["genre"].value
-        };
-        $.ajax({
-            url: 'https://localhost:44325/api/movie',
-            dataType: 'json',
-            type: 'put',
-            contentType: 'application/json',
-            data: JSON.stringify(dict),
-            success: function(data){
-                $('#response pre').html( data );
-            },
-            error: function(errorThrown ){
-                console.log( errorThrown );
-            }
-        });
-        e.preventDefault();
-    }
-        $(".editInfo").submit( processForm );
+function processChange(){
+    let id = $('#updateId').val();
+    var dict = {
+        title : $('#updateTitle').val(),
+        director: $("#updateDirector").val(),
+        genre: $("#updateGenre").val()
+    };
+    $.ajax({
+        url: 'https://localhost:44325/api/movie/'+ id,
+        dataType: 'json',
+        type: 'put',
+        contentType: 'application/json',
+        data: JSON.stringify(dict),
+        success: function(data){
+            console.log(data);
+            movieDetails(id);
+            $('.movieData').html(
+                "<tr>" + 
+                    "<td>" + dict.title + "</td>" +
+                    "<td>" + dict.director + "</td>" +
+                    "<td>" + dict.genre + "</td>" +
+                "</tr>");
+        },
+        error: function(errorThrown ){
+            console.log( errorThrown );
+        }
+    });
+    
 }(jQuery);
 
 function createTables(data){
