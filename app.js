@@ -90,3 +90,28 @@ function processChange($){
     }
         $(".editInfo").submit( processForm );
     }(jQuery);
+
+(function($){
+    $('#add').on('click', function(){
+        var newMovie = {
+            title : $('#title').val(),
+            director : $('director').val(),
+            genre : $('#genre').val(),
+            
+        };
+        $.ajax({
+            url: 'https://localhost:44325/api/movie',
+            dataType : 'json',
+            type : 'post',
+            contentType : 'application/json',
+            data: JSON.stringify(newMovie),
+            success: function(movie){
+               $('.movieData').html('<tr><td>' + movie.title + '</td><td>' 
+               + movie.director + '</td><td>' + movie.genre + '</td></tr>'); 
+            },
+            error: function(errorThrown ){
+                console.log( errorThrown );
+            }
+        });
+    });
+})(jQuery);
