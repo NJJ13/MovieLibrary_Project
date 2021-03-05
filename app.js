@@ -5,7 +5,7 @@ $(document).ready(function(){
         dataType: "json",
         type: "get",
         success: function(data){
-            $(".movieData").html('');
+            $('.movieData').html('');
         },
         error: function(errorThrown){
             console.log(errorThrown);
@@ -17,7 +17,7 @@ $(document).ready(function(){
             "<th scope='col'></th>"
         )
         $.each(data, function(index, value){
-            $(".movieData").append(
+            $('.movieData').append(
                 "<tr>" + 
                     "<td>" + value.title + "</td>" +
                     "<td>" + "<button type='button'" + "onclick='movieDetails(" + value.movieId + ");'" + "class='btn btn-primary btn-lg'>" + "Details" + "" + "</button>" +
@@ -36,7 +36,7 @@ function movieDetails(id){
     $.get('https://localhost:44325/api/movie/', function(data){
         data.map(function(el){
             if(id === el.movieId){
-            $(".movieData").html(
+            $('.movieData').html(
             "<tr>" + 
                 "<td>" + el.title + "</td>" +
                 "<td>" + el.director + "</td>" +
@@ -95,7 +95,7 @@ function processChange($){
     $('#add').on('click', function(){
         var newMovie = {
             title : $('#title').val(),
-            director : $('director').val(),
+            director : $('#director').val(),
             genre : $('#genre').val(),
         };
         $.ajax({
@@ -105,8 +105,7 @@ function processChange($){
             contentType : 'application/json',
             data: JSON.stringify(newMovie),
             success: function(movie){
-               $('.movieData').html('<tr><td>' + movie.title + '</td><td>' 
-               + movie.director + '</td><td>' + movie.genre + '</td></tr>'); 
+               $('.movieData').append('<tr><td>' + movie.title + '</td>' + `<td><button type='button' onclick='movieDetails(${movie.movieId});' class='btn btn-primary btn-lg'>Details</button>` + '</td></tr>'); 
             },
             error: function(errorThrown ){
                 console.log( errorThrown );
